@@ -15,6 +15,9 @@ function search(event) {
   axios.get(apiUrl).then(displayTemperature);
 }
 
+let iconElement = document.querySelector("#icon");
+iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
+
 function formatDate(date) {
   let minutes = date.getMinutes();
   let hours = date.getHours();
