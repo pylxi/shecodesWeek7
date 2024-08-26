@@ -47,7 +47,10 @@ main {
 }
 
 .current-temperature {
+  display: flex;
   font-size: 48px;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .current-weather {
@@ -88,7 +91,51 @@ main {
   position: relative;
   top: -38px;
 }
+/* Forecast section */
+.weather-forecast {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 1em;
+}
 
+.weather-forecast-day {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 auto;
+  padding: 10px 0;
+  text-align: center;
+  line-height: 30px;
+  color: #2a2a33;
+}
+
+.weather-forecast-date {
+  font-size: 20px;
+  font-weight: 900;
+  margin: 0;
+}
+
+.weather-forecast-temperatures {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  text-align: center;
+}
+
+.weather-forecast-temperature {
+  font-size: 20px;
+  font-weight: bold;
+  color: #f65282;
+}
+
+.weather-forecast-icon {
+  font-size: 27px;
+  text-align: center;
+  margin: auto;
+}
+
+/* Footer */
 footer {
   border-top: 1px solid #f9f7fe;
   text-align: center;
