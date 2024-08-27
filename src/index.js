@@ -1,5 +1,8 @@
 function search(event) {
-  event.preventDefault();
+  if (event) {
+    event.preventDefault();
+  }
+
   let searchInputElement = document.querySelector("#search-input");
   let city = searchInputElement.value;
   let cityElement = document.querySelector("#current-city");
@@ -13,6 +16,7 @@ function search(event) {
   let apiUrl = `https://api.shecodes.io/weather/v1/current?query=${city}&key=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayTemperature);
+  getForecast(city, apiKey);
 }
 
 function formatDate(date) {
@@ -50,33 +54,51 @@ function displayTemperature(response) {
   iconElement.innerHTML = `<img src="${response.data.condition.icon_url}" class="weather-app-icon" />`;
 }
 
-let searchForm = document.querySelector("#search-form");
-searchForm.addEventListener("submit", search);
+function getForecast(city, apiKey) {
+  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?query=${city}&key=${apiKey}&units=metric`;
 
-function displayForecast() {
-  let forecast = document.querySelector("#forecast");
+  axios.get(apiUrl).then(displayForecast);
+}
 
-  let days = ["Tue", "Wed", "Thu", "Fri", "Sat"];
+function displayForecast(response) {
+  let forecast = response.data.daily.slice(0, 5);
+  let forecastElement = document.querySelector("#forecast");
 
   let forecastHtml = "";
 
-  days.forEach(function (day) {
-    forecastHtml =
-      forecastHtml +
-      `
-          <div class="weather-forecast-day">
-            <div class="weather-forecast-date">Tue</div>
-            <div class="weather-forecast-temperatures">
-                <div class="weather-forecast-temperature max-temp">19º</div>
-                <div class="weather-forecast-temperature min-temp">4º</div>
-            </div>
-            <div class="weather-forecast-icon">☀️</div>
-          </div>
-      `;
+  forecast.forEach(function (day) {
+    let dayName = new Date(day.time * 1000).toLocaleDateString("en-US", {
+      weekday: "short",
+    });
+    forecastHtml += `
+      <div class="weather-forecast-day">
+        <div class="weather-forecast-date">${dayName}</div>
+        <div class="weather-forecast-temperatures">
+          <div class="weather-forecast-temperature max-temp">${Math.round(
+            day.temperature.maximum
+          )}°C</div>
+          <div class="weather-forecast-temperature min-temp">${Math.round(
+            day.temperature.minimum
+          )}°C</div>
+        </div>
+        <div class="weather-forecast-icon"><img src="${
+          day.condition.icon_url
+        }" alt="" class="weather-app-icon"/></div>
+      </div>
+    `;
   });
 
-  let forecastElement = document.querySelector("#forecast");
   forecastElement.innerHTML = forecastHtml;
 }
 
-displayForecast();
+let searchForm = document.querySelector("#search-form");
+searchForm.addEventListener("submit", search);
+
+function initialize() {
+  let searchInputElement = document.querySelector("#search-input");
+  searchInputElement.value = "Paris"; // Default city
+  search(); // Trigger the search function without an event
+}
+
+// Call initialize function on page load
+initialize();

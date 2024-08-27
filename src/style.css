@@ -1,17 +1,20 @@
 body {
   background: #f9f7fe;
   font-family: "Roboto", sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 a {
   color: #885df1;
+  text-decoration: none;
 }
 
 .weather-app {
   background: white;
   max-width: 600px;
-  margin: 60px auto;
-  padding: 30px;
+  margin: 40px auto;
+  padding: 40px 80px;
   border-radius: 10px;
   box-shadow: 0 30px 50px rgba(65, 50, 100, 0.08);
 }
@@ -19,6 +22,8 @@ a {
 header {
   border-bottom: 1px solid #f9f7fe;
   padding-bottom: 30px;
+  display: flex;
+  justify-content: center;
 }
 
 .search-input {
@@ -27,7 +32,7 @@ header {
   color: rgba(39, 33, 66, 0.4);
   font-size: 16px;
   padding: 20px;
-  width: 75%;
+  width: 70%;
   border-radius: 6px;
 }
 
@@ -48,9 +53,9 @@ main {
 
 .current-temperature {
   display: flex;
-  font-size: 48px;
-  justify-content: space-between;
+  font-size: 36px;
   align-items: center;
+  justify-content: flex-end;
 }
 
 .current-weather {
@@ -82,7 +87,7 @@ main {
 }
 
 .current-temperature-value {
-  font-size: 80px;
+  font-size: 72px;
   font-weight: bold;
 }
 
@@ -97,6 +102,7 @@ main {
   justify-content: space-between;
   flex-direction: row;
   margin-top: 1em;
+  gap: 10px;
 }
 
 .weather-forecast-day {
@@ -121,16 +127,24 @@ main {
   flex-direction: row;
   justify-content: space-between;
   text-align: center;
+  gap: 5px;
 }
 
 .weather-forecast-temperature {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: bold;
   color: #f65282;
 }
 
+.max-temp {
+  color: #f65282;
+}
+
+.min-temp {
+  color: #f899b5;
+}
 .weather-forecast-icon {
-  font-size: 27px;
+  font-size: 15px;
   text-align: center;
   margin: auto;
 }
